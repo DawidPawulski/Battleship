@@ -136,9 +136,23 @@ def players_shooting(which_player, opponents_board, score_board, ships_4, ship_3
                 print("Please write only integers!")
                 continue
 
-        if shoot_board[i] in ships_4 or shoot_board[i] in ship_3 or shoot_board[i] in ship_2:
+        if shoot_board[i] in ships_4:
             opponents_board[int(shoot_board[i])-1] = f"{Fore.GREEN} X{Style.RESET_ALL}"
             print("\n\n YOU HIT!")
+            ships_4.remove(shoot_board[i])
+            ships_sinked(ships_4, ship_3, ship_2)
+            score_board = int(score_board)+1
+        elif shoot_board[i] in ship_3:
+            opponents_board[int(shoot_board[i])-1] = f"{Fore.GREEN} X{Style.RESET_ALL}"
+            print("\n\n YOU HIT!")
+            ship_3.remove(shoot_board[i])
+            ships_sinked(ships_4, ship_3, ship_2)
+            score_board = int(score_board)+1
+        elif shoot_board[i] in ship_2:
+            opponents_board[int(shoot_board[i])-1] = f"{Fore.GREEN} X{Style.RESET_ALL}"
+            print("\n\n YOU HIT!")
+            ship_2.remove(shoot_board[i])
+            ships_sinked(ships_4, ship_3, ship_2)
             score_board = int(score_board)+1
         else:
             opponents_board[int(shoot_board[i])-1] = f"{Fore.RED} 0{Style.RESET_ALL}"
@@ -152,6 +166,18 @@ def players_shooting(which_player, opponents_board, score_board, ships_4, ship_3
             break
         if int(score_board) == 9:
             break
+
+
+def ships_sinked(ship_4, ship_3, ship_2):
+    if len(ship_4) == 0:
+        print("aircraft carrier sinked")
+        ship_4.append("Sinked")
+    if len(ship_3) == 0:
+        print("destroyer sinked")
+        ship_3.append("Sinked")
+    if len(ship_2) == 0:
+        print("submarine sinked")
+        ship_2.append("Sinked")
 
 
 def two_players():
@@ -210,9 +236,22 @@ def play_against_ai():
             ai_shoot_list.append(ai_shoot)
             print("AI shooted at position {}".format(ai_shoot))
 
-            if str(ai_shoot_list[j]) in ships_4_position_player_1 or str(ai_shoot_list[j]) in ship_3_position_player_1 \
-               or str(ai_shoot_list[j]) in ship_2_position_player_1:
+            if str(ai_shoot_list[j]) in ships_4_position_player_1:
                 player_1_board[int(ai_shoot_list[j])-1] = f"{Fore.GREEN} X{Style.RESET_ALL}"
+                ships_4_position_player_1.remove(str(ai_shoot_list[j]))
+                ships_sinked(ships_4_position_player_1, ship_3_position_player_1, ship_2_position_player_1)
+                print("\n AI HIT! \n")
+                score_ai = int(score_ai)+1
+            elif str(ai_shoot_list[j]) in ship_3_position_player_1:
+                player_1_board[int(ai_shoot_list[j])-1] = f"{Fore.GREEN} X{Style.RESET_ALL}"
+                ship_3_position_player_1.remove(str(ai_shoot_list[j]))
+                ships_sinked(ships_4_position_player_1, ship_3_position_player_1, ship_2_position_player_1)
+                print("\n AI HIT! \n")
+                score_ai = int(score_ai)+1
+            elif str(ai_shoot_list[j]) in ship_2_position_player_1:
+                player_1_board[int(ai_shoot_list[j])-1] = f"{Fore.GREEN} X{Style.RESET_ALL}"
+                ship_2_position_player_1.remove(str(ai_shoot_list[j]))
+                ships_sinked(ships_4_position_player_1, ship_3_position_player_1, ship_2_position_player_1)
                 print("\n AI HIT! \n")
                 score_ai = int(score_ai)+1
             else:
