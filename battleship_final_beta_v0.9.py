@@ -15,6 +15,7 @@ player_1_board_position = list(range(1, 37))
 player_2_board_position = list(range(1, 37))
 ai_random_shooting = list(range(1, 37))
 
+global board_radical
 
 def board_drawing(board):
     board_lenght = len(board)
@@ -38,11 +39,26 @@ def board_drawing(board):
 def setting_ships_position(board, ship_class, ship_lenght):
     while True:
         try:
+            i = 0
+
             position = input("Set the position of your {}: ".format(ship_class))
             position = position.split(" ")
             if len(position) != int(ship_lenght):
                 print(f"It must be {ship_lenght} values")
                 continue
+
+            while i < int(ship_lenght)-1:
+                if int(position[i])+1 != int(position[i+1]) and int(position[i])+6 != int(position[i+1]):
+                    print("\t Every position must be next to each other!! ")
+                    break
+                i += 1
+            i -= 1
+
+            if int(position[i])+1 != int(position[i+1]) and int(position[i])+6 != int(position[i+1]):
+                continue
+                
+            str(position)
+
             for n in position:
                 # boom = u"\U0001F4A5"
                 # ship = u"\U0001F6A2"
@@ -214,7 +230,7 @@ def players_shooting(which_player, opponents_board, score_board, ships_4, ship_3
             score_board = int(score_board)+1
         elif shoot_board[i] in ship_2:
             opponents_board[int(shoot_board[i])-1] = f"{Fore.GREEN}{hit}{Style.RESET_ALL}"
-            print("\n\n YOU HIT!")
+            print("\n YOU HIT!")
             ship_2.remove(shoot_board[i])
             ships_sinked(ships_4, ship_3, ship_2)
             score_board = int(score_board)+1
@@ -233,13 +249,13 @@ def players_shooting(which_player, opponents_board, score_board, ships_4, ship_3
 
 def ships_sinked(ship_4, ship_3, ship_2):
     if len(ship_4) == 0:
-        print("aircraft carrier sinked")
+        print("\n AIRCRAFT CARRIER SINKED \n")
         ship_4.append("Sinked")
     if len(ship_3) == 0:
-        print("destroyer sinked")
+        print("\n DESTROYER SINKED \n")
         ship_3.append("Sinked")
     if len(ship_2) == 0:
-        print("submarine sinked")
+        print("\n SUBMARINE SINKED \n")
         ship_2.append("Sinked")
 
 
@@ -335,7 +351,7 @@ def play_against_ai():
             time.sleep(4)
             j = int(j)+1
             if int(score_ai) == 9:
-                print("AI ARE WINNER!!")
+                print("AI ARE WINNER!! \n")
                 break
         if int(score_ai) == 9:
             break
