@@ -150,8 +150,7 @@ def players_shooting(which_player, opponents_board, score_board, ships_4, ship_3
         if int(score_board) == 9:
             print("\n\n PLAYER {} ARE WINNER!!".format(which_player))
             break
-        if int(score_board) == 9:
-            break
+    return score_board
 
 
 def two_players():
@@ -174,12 +173,18 @@ def two_players():
     score_player_2 = 0
 
     while True:
-        players_shooting("1", player_2_board, score_player_1, ships_4_position_player_2,
+        
+        score_player_1 = players_shooting("1", player_2_board, score_player_1, ships_4_position_player_2,
                          ship_3_position_player_2, ship_2_position_player_2)
 
-        players_shooting("2", player_1_board, score_player_2, ships_4_position_player_1,
+        if int(score_player_1) == 9:
+            break
+
+        score_player_2 = players_shooting("2", player_1_board, score_player_2, ships_4_position_player_1,
                          ship_3_position_player_1, ship_2_position_player_1)
 
+        if int(score_player_2) == 9:
+            break
 
 def play_against_ai():
 
@@ -196,8 +201,11 @@ def play_against_ai():
     score_ai = 0
 
     while True:
-        players_shooting("1", ai_board, score_player_1, ships_4_ai_position,
+        score_player_1 = players_shooting("1", ai_board, score_player_1, ships_4_ai_position,
                          ship_3_ai_position, ship_2_ai_position)
+
+        if int(score_player_1) == 9:
+            break
 
         ai_shoot_list = []
         j = 0
@@ -221,11 +229,9 @@ def play_against_ai():
             board_drawing(player_1_board)
             time.sleep(4)
             j = int(j)+1
-
             if int(score_ai) == 9:
                 print("AI ARE WINNER!!")
                 break
-
         if int(score_ai) == 9:
             break
 
