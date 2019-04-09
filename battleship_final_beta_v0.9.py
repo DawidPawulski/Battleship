@@ -1,6 +1,7 @@
 import random
 import os
 import time
+import sys
 from colorama import Style, Fore
 
 # time.sleep(6)
@@ -291,4 +292,60 @@ def game_choose():
         two_players()
 
 
+def menu():
+    while True:
+        options = ["1","2" ,"3","4"]
+        choose = input("""\n
+───│─────────────────────────────────────
+───│────────▄▄───▄▄───▄▄───▄▄───────│────
+───▌────────▒▒───▒▒───▒▒───▒▒───────▌────
+───▌──────▄▀█▀█▀█▀█▀█▀█▀█▀█▀█▀▄─────▌────
+───▌────▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄───▋────
+▀█████████████1 START GAME█████████████▄─
+──▀████████████2 TUTORIAL█████████████▀──
+─────▀██████████3 CREDITS███████████▀────
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒4 QUIT▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒5 BACK▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+\n
+""")
+        if choose == '1':
+            game_choose()
+        elif choose == '2':
+            tutorial()
+        elif choose == '3':
+            credits_4()
+        elif choose == '4':
+            quit_game()
+        else:
+            print('Please select 1, 2, 3 or 4')
+          
+
+
+def tutorial():
+    print('''\n
+        The game is played on four boards, two for each player,\n 
+        first player must place his ships on board coordinates.\n
+        Place 4 coordinates next to eachother for "Aircraft Carrier",\n
+        3 for "Destroyer" and 2 for "Submarine".\n
+        Your coordinates should be placed from lowest to highest.\n
+        You can set your ships horizonatally or vertically.\n
+        After settings of the ships, by both players, shooting phase begins.\n
+        First player shoots first and strikes 3 times, each HIT is marked as "X" and MISSED "O"\n
+        Game ends when one of the players hits all enemy ships coordinates''')
+
+
+def credits_4():
+    print('''\n
+    Game Designers:
+    1. Dawid Pawulski\n
+    2. Wociech Adamowski\n
+    3. Tomasz Sikorski\n
+    4. Marek Śmiałowski\n''')
+
+def quit_game():
+    exit(0)
+    
+menu()
 game_choose()
+
