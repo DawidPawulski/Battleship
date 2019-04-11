@@ -1,7 +1,6 @@
 import random
 import os
 import time
-import sys
 from colorama import Style, Fore
 
 # time.sleep(6)
@@ -16,6 +15,7 @@ player_2_board_position = list(range(1, 37))
 ai_random_shooting = list(range(1, 37))
 
 global board_radical
+
 
 def board_drawing(board):
     board_lenght = len(board)
@@ -54,7 +54,7 @@ def setting_ships_position(board, ship_class, ship_lenght):
 
             if int(position[i])+1 != int(position[i+1]) and int(position[i])+6 != int(position[i+1]):
                 continue
-                
+
             str(position)
 
             for n in position:
@@ -401,13 +401,13 @@ def menu():
 
 def back():
     choose_1 = input("Press ENTER for MENU\n")
-    if choose_1 == True:
+    if choose_1 is True:
         menu()
-        
+
 
 def tutorial():
     print('''\n
-        The game is played on four boards, two for each player,\n 
+        The game is played on four boards, two for each player,\n
         first player must place his ships on board coordinates.\n
         Place 4 coordinates next to eachother for "Aircraft Carrier",\n
         3 for "Destroyer" and 2 for "Submarine".\n
@@ -427,6 +427,7 @@ def credits_4():
     3. Tomasz Sikorski\n
     4. Marek Śmiałowski\n''')
     back()
+
 
 def quit_game():
     exit(0)
