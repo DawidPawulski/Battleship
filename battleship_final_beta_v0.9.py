@@ -375,7 +375,6 @@ def game_choose():
 
 def menu():
     while True:
-        options = ["1", "2", "3", "4"]
         choose = input("""\n
 ───│─────────────────────────────────────
 ───│────────▄▄───▄▄───▄▄───▄▄───────│────
@@ -386,7 +385,7 @@ def menu():
 ──▀████████████2 TUTORIAL█████████████▀──
 ─────▀██████████3 CREDITS███████████▀────
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒4 QUIT▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒5 BACK▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 \n
 """)
@@ -402,6 +401,12 @@ def menu():
             print('Please select 1, 2, 3 or 4')
 
 
+def back():
+    choose_1 = input("Press ENTER for MENU\n")
+    if choose_1 == True:
+        menu()
+        
+
 def tutorial():
     print('''\n
         The game is played on four boards, two for each player,\n 
@@ -410,23 +415,24 @@ def tutorial():
         3 for "Destroyer" and 2 for "Submarine".\n
         Your coordinates should be placed from lowest to highest.\n
         You can set your ships horizonatally or vertically.\n
-        After settings of the ships, by both players, shooting phase begins.\n
+        After ships are placed by both players, shooting phase begins.\n
         First player shoots first and strikes 3 times, each HIT is marked as "X" and MISSED "O"\n
         Game ends when one of the players hits all enemy ships coordinates''')
+    back()
 
 
 def credits_4():
     print('''\n
     Game Designers:
     1. Dawid Pawulski\n
-    2. Wociech Adamowski\n
+    2. Wojciech Adamowski\n
     3. Tomasz Sikorski\n
     4. Marek Śmiałowski\n''')
-
+    back()
 
 def quit_game():
     exit(0)
-    
+
+
 menu()
 game_choose()
-
