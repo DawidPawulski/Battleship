@@ -47,12 +47,10 @@ def setting_ships_position(board, ship_class, ship_lenght):
                 print(f"It must be {ship_lenght} values")
                 continue
 
-            while i < int(ship_lenght)-1:
+            for i in range(int(ship_lenght)-1):
                 if int(position[i])+1 != int(position[i+1]) and int(position[i])+6 != int(position[i+1]):
                     print("\t Every position must be next to each other!! ")
                     break
-                i += 1
-            i -= 1
 
             if int(position[i])+1 != int(position[i+1]) and int(position[i])+6 != int(position[i+1]):
                 continue
