@@ -373,7 +373,7 @@ def game_choose():
 
 def menu():
     while True:
-        options = ["1","2" ,"3","4"]
+        options = ["1", "2", "3", "4"]
         choose = input("""\n
 ───│─────────────────────────────────────
 ───│────────▄▄───▄▄───▄▄───▄▄───────│────
@@ -398,7 +398,6 @@ def menu():
             quit_game()
         else:
             print('Please select 1, 2, 3 or 4')
-          
 
 
 def tutorial():
@@ -421,6 +420,7 @@ def credits_4():
     2. Wociech Adamowski\n
     3. Tomasz Sikorski\n
     4. Marek Śmiałowski\n''')
+
 
 def quit_game():
     exit(0)
