@@ -317,9 +317,24 @@ def play_against_ai():
         print("(AI)BOARD WHEN AI SHOOT EARLIER")
         board_drawing(player_1_board)
         time.sleep(3)
+        previous_hit = 0
         while int(j) < 3:
-            ai_shoot = random.choice(ai_random_shooting)
-            ai_random_shooting.remove(ai_shoot)
+            try:
+                if previous_hit == 1:
+                    previous_shoot = int(ai_shoot_list[j-1])
+                    while True:
+                        try:
+                            ai_shoot = random.choice([previous_shoot+1, previous_shoot+6, previous_shoot-1, previous_shoot-6])
+                            ai_random_shooting.remove(ai_shoot)
+                        except ValueError:
+                            continue
+                        break
+                elif previous_hit == 0:
+                    ai_shoot = random.choice(ai_random_shooting)
+                    ai_random_shooting.remove(ai_shoot)
+            except UnboundLocalError:
+                pass
+            
             ai_shoot_list.append(ai_shoot)
             print("AI shooted at position {}".format(ai_shoot))
             hit = "X".center(6)
@@ -330,21 +345,25 @@ def play_against_ai():
                 ships_sinked(ships_4_position_player_1, ship_3_position_player_1, ship_2_position_player_1)
                 print("\n AI HIT! \n")
                 score_ai = int(score_ai)+1
+                previous_hit = 1
             elif str(ai_shoot_list[j]) in ship_3_position_player_1:
                 player_1_board[int(ai_shoot_list[j])-1] = f"{Fore.GREEN}{hit}{Style.RESET_ALL}"
                 ship_3_position_player_1.remove(str(ai_shoot_list[j]))
                 ships_sinked(ships_4_position_player_1, ship_3_position_player_1, ship_2_position_player_1)
                 print("\n AI HIT! \n")
                 score_ai = int(score_ai)+1
+                previous_hit = 1
             elif str(ai_shoot_list[j]) in ship_2_position_player_1:
                 player_1_board[int(ai_shoot_list[j])-1] = f"{Fore.GREEN}{hit}{Style.RESET_ALL}"
                 ship_2_position_player_1.remove(str(ai_shoot_list[j]))
                 ships_sinked(ships_4_position_player_1, ship_3_position_player_1, ship_2_position_player_1)
                 print("\n AI HIT! \n")
                 score_ai = int(score_ai)+1
+                previous_hit = 1
             else:
                 player_1_board[int(ai_shoot_list[j])-1] = f"{Fore.RED}{miss}{Style.RESET_ALL}"
                 print("\n AI MISSED \n")
+                previous_hit = 0
             board_drawing(player_1_board)
             time.sleep(4)
             j = int(j)+1
