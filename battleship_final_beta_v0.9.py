@@ -14,6 +14,8 @@ player_1_board_position = list(range(1, 37))
 player_2_board_position = list(range(1, 37))
 ai_random_shooting = list(range(1, 37))
 
+ship1, ship2, ship3 = setting_position_pl_1()
+
 global board_radical
 
 
@@ -72,15 +74,13 @@ def setting_ships_position(board, ship_class, ship_lenght):
 
 def setting_position_pl_1():
     print("Player 1 please enter position of your ships")
-    global ships_4_position_player_1
     ships_4_position_player_1 = setting_ships_position(player_1_board_position, "aircraft carrier", "4")
 
-    global ship_3_position_player_1
     ship_3_position_player_1 = setting_ships_position(player_1_board_position, "destroyer", "3")
 
-    global ship_2_position_player_1
     ship_2_position_player_1 = setting_ships_position(player_1_board_position, "submarine", "2")
 
+    return ships_4_position_player_1, ship_2_position_player_1, ship_3_position_player_1
 
 def setting_position_pl_2():
     print("Player 2 please enter position of your ships")
@@ -138,7 +138,8 @@ def setting_position_ai():
         if n in position_ship_2_list_vert:
             position_ship_2_list_vert.remove(n)
 
-    while True:
+    running = True
+    while running:
         random_direction_s3 = random.choice(horizontal_or_vertical)
         global ship_3_ai_position
         if random_direction_s3 == 1:
@@ -149,7 +150,7 @@ def setting_position_ai():
             for n in ship_3_ai_position:
                 if n in ships_4_ai_position:
                     continue
-            break
+            running = False
         elif random_direction_s3 == 0:
             random_num = random.choice(position_ship_3_list_vert)
             ship_3_first_position = ai_random_shooting[random_num-1]
